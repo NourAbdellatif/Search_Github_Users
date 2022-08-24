@@ -19,7 +19,8 @@
         tools:itemCount="5"
         tools:listitem="@layout/layout_rv_item" />
 
-    <SearchView
+    <androidx.appcompat.widget.SearchView
+        android:id="@+id/searchView"
         android:layout_width="403dp"
         android:layout_height="47dp"
         android:layout_marginBottom="3dp"

@@ -14,9 +14,9 @@ class MainViewModel(private val repository: MainRepository) : ViewModel() {
     val userList = MutableLiveData<List<User>>()
     val errorMessage = MutableLiveData<String>()
 
-    fun getAllMovies() {
+    fun getAllUsers(username:String) {
 
-        val response = repository.getAllUsers()
+        val response = repository.getAllUsers(username)
         response.enqueue(object : Callback<UserList> {
             override fun onResponse(call: Call<UserList>, response: Response<UserList>) {
                 userList.postValue(response.body()?.mList)
