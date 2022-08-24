@@ -1,5 +1,6 @@
 package com.c1ctech.mvvmwithnetworksource.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.c1ctech.mvvmwithnetworksource.User
@@ -11,15 +12,26 @@ import retrofit2.Response
 
 class MainViewModel(private val repository: MainRepository) : ViewModel() {
 
-    val userList = MutableLiveData<List<User>>()
+    val userListLive = MutableLiveData<List<User>>()
     val errorMessage = MutableLiveData<String>()
+    fun getAllUsers(username:String,page:Int) {
 
-    fun getAllUsers(username:String) {
-
-        val response = repository.getAllUsers(username)
+        val response = repository.getAllUsers(username,page)
         response.enqueue(object : Callback<UserList> {
             override fun onResponse(call: Call<UserList>, response: Response<UserList>) {
-                userList.postValue(response.body()?.mList)
+                userListLive.postValue(response.body()?.mList)
+            }
+
+            override fun onFailure(call: Call<UserList>, t: Throwable) {
+                errorMessage.postValue(t.message)
+            }
+        })
+    }
+    fun addUsers(username:String,page:Int){
+        val response = repository.getAllUsers(username,page)
+        response.enqueue(object : Callback<UserList> {
+            override fun onResponse(call: Call<UserList>, response: Response<UserList>) {
+                userListLive.postValue(response.body()?.mList)
             }
 
             override fun onFailure(call: Call<UserList>, t: Throwable) {
@@ -28,3 +40,4 @@ class MainViewModel(private val repository: MainRepository) : ViewModel() {
         })
     }
 }
+

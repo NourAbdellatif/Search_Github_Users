@@ -5,5 +5,5 @@ import retrofit2.http.Query
 
 class MainRepository constructor(private val retrofitService: RetrofitService) {
 
-    fun getAllUsers(@Query("q") username : String) = retrofitService.getAllUsers(username)
+    fun getAllUsers(@Query("q") username : String,@Query("page") page:Int) = retrofitService.getAllUsers(username,page)
 }

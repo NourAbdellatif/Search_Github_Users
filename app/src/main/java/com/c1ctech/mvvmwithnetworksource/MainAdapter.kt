@@ -2,6 +2,7 @@ package com.c1ctech.mvvmwithnetworksource
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.AbsListView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.c1ctech.mvvmwithnetworksource.databinding.LayoutRvItemBinding
@@ -14,6 +15,7 @@ class MainAdapter : RecyclerView.Adapter<MainViewHolder>() {
         this.users = users.toMutableList()
         notifyDataSetChanged()
     }
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MainViewHolder {
         val inflater = LayoutInflater.from(parent.context)
