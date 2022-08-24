@@ -34,9 +34,9 @@ class MainActivity : AppCompatActivity() {
 
         //the observer will only receive events if the owner(activity) is in active state
         //invoked when movieList data changes
-        viewModel.movieList.observe(this, Observer {
+        viewModel.userList.observe(this, Observer {
             Log.d(TAG, "movieList: $it")
-            adapter.setMovieList(it)
+            adapter.setUserList(it)
         })
 
         //invoked when a network exception occurred

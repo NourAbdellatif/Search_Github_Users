@@ -8,10 +8,10 @@ import com.c1ctech.mvvmwithnetworksource.databinding.LayoutRvItemBinding
 
 class MainAdapter : RecyclerView.Adapter<MainViewHolder>() {
 
-    var movies = mutableListOf<Movie>()
+    var users = mutableListOf<User>()
 
-    fun setMovieList(movies: List<Movie>) {
-        this.movies = movies.toMutableList()
+    fun setUserList(users: List<User>) {
+        this.users = users.toMutableList()
         notifyDataSetChanged()
     }
 
@@ -23,15 +23,15 @@ class MainAdapter : RecyclerView.Adapter<MainViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: MainViewHolder, position: Int) {
-        val movie = movies[position]
-        holder.binding.movieTitle.text = movie.title
-        Glide.with(holder.itemView.context).load(movie.poster).placeholder(R.drawable.placeholder)
-            .into(holder.binding.moviePoster)
+        val user = users[position]
+        holder.binding.username.text = user.username
+        Glide.with(holder.itemView.context).load(user.avatar).placeholder(R.drawable.placeholder)
+            .into(holder.binding.avatar)
 
     }
 
     override fun getItemCount(): Int {
-        return movies.size
+        return users.size
     }
 }
 
