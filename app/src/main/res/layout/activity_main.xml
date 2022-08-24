@@ -21,6 +21,8 @@
 
     <androidx.appcompat.widget.SearchView
         android:id="@+id/searchView"
+        app:iconifiedByDefault="false"
+        app:queryHint="Enter Username....."
         android:layout_width="403dp"
         android:layout_height="47dp"
         android:layout_marginBottom="3dp"

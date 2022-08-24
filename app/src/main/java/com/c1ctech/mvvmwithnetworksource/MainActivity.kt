@@ -24,33 +24,21 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-//        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-//            override fun onQueryTextSubmit(query: String): Boolean {
-//                Log.d("Tag",query)
-//                return false
-//            }
-//            override fun onQueryTextChange(newText: String): Boolean {
-//
-//                return false
-//            }
-//        })
-        //get viewmodel instance using ViewModelProvider.Factory
+
+
         viewModel =
             ViewModelProvider(this, MyViewModelFactory(MainRepository(retrofitService))).get(
                 MainViewModel::class.java
             )
 
-        //set adapter in recyclerview
+
         binding.recyclerview.adapter = adapter
 
-        //the observer will only receive events if the owner(activity) is in active state
-        //invoked when movieList data changes
         viewModel.userList.observe(this, Observer {
-            Log.d(TAG, "movieList: $it")
+            Log.d(TAG, "userList: $it")
             adapter.setUserList(it)
         })
 
-        //invoked when a network exception occurred
         viewModel.errorMessage.observe(this, Observer {
             Log.d(TAG, "errorMessage: $it")
         })
