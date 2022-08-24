@@ -8,8 +8,8 @@ import com.bumptech.glide.Glide
 import com.c1ctech.mvvmwithnetworksource.databinding.LayoutRvItemBinding
 
 class MainAdapter : RecyclerView.Adapter<MainViewHolder>() {
-
-    var users = mutableListOf<User>()
+    private val temp = User("API LIMIT REACHED","https://cdn-icons-png.flaticon.com/512/25/25231.png?w=360")
+    var users = mutableListOf<User>((temp))
 
     fun setUserList(users: List<User>) {
         this.users = users.toMutableList()

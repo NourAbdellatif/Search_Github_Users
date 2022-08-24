@@ -41,12 +41,15 @@ class MainActivity : AppCompatActivity(){
 
         viewModel.userListLive.observe(this) {
             Log.d(TAG, "userList: $it")
+            if(adapter.users==null || it==null) {
 
-            if(sameName){
-                adapter.setUserList(adapter.users+it)
             }
             else{
-                adapter.setUserList(it!!)
+                if (sameName) {
+                    adapter.setUserList(adapter?.users!!+ it!!)
+                } else {
+                    adapter.setUserList(it!!)
+                }
             }
         }
         viewModel.errorMessage.observe(this) {
