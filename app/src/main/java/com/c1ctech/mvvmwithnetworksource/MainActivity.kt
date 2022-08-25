@@ -5,7 +5,9 @@ import android.util.Log
 import kotlin.time.Duration
 import kotlin.time.Duration.Companion.seconds
 import kotlinx.coroutines.*
-import kotlinx.coroutines.flow.*import android.widget.SearchView
+import kotlinx.coroutines.flow.*
+import android.widget.SearchView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -16,14 +18,14 @@ import com.c1ctech.mvvmwithnetworksource.viewmodel.MainViewModel
 import kotlinx.coroutines.channels.ticker
 
 
-class MainActivity : AppCompatActivity(){
+class MainActivity : AppCompatActivity() {
 
     private val TAG = "MainActivity"
     private lateinit var binding: ActivityMainBinding
     lateinit var viewModel: MainViewModel
-    var page=1
-    var name=""
-    var sameName=false
+    var page = 1
+    var name = ""
+    var sameName = false
 
     private val retrofitService = RetrofitService.getInstance()
     val adapter = MainAdapter()
@@ -41,14 +43,18 @@ class MainActivity : AppCompatActivity(){
 
         viewModel.userListLive.observe(this) {
             Log.d(TAG, "userList: $it")
-            if(adapter.users==null || it==null) {
-
-            }
-            else{
+            if (it == null) {
+                Toast.makeText(
+                    this,
+                    "API limit reached try again in a few moments",
+                    Toast.LENGTH_SHORT
+                ).show()
+            } else {
                 if (sameName) {
-                    adapter.setUserList(adapter?.users!!+ it!!)
+                    adapter.setUserList(adapter.users + it)
                 } else {
-                    adapter.setUserList(it!!)
+                    page = 1
+                    adapter.setUserList(it)
                 }
             }
         }
@@ -64,15 +70,13 @@ class MainActivity : AppCompatActivity(){
                 val totalItemCount = recyclerView.layoutManager!!.itemCount
                 val lastPosition = linearLayoutManager?.findLastCompletelyVisibleItemPosition()
                 Log.d(TAG, "Last Pos= $lastPosition")
-                if (linearLayoutManager != null && lastPosition ==totalItemCount-1 ) {
+                if (linearLayoutManager != null && lastPosition == totalItemCount - 1) {
                     //bottom of list!
-                    ticker(3000)
-                    page+=1
-                    sameName=true
-                    viewModel.addUsers(name,page)
-                }
-                else{
-                    Log.d(TAG," sad")
+                    page += 1
+                    sameName = true
+                    viewModel.addUsers(name, page)
+                } else {
+                    Log.d(TAG, " sad")
                 }
             }
         })
@@ -80,9 +84,9 @@ class MainActivity : AppCompatActivity(){
             androidx.appcompat.widget.SearchView.OnQueryTextListener {
 
             override fun onQueryTextSubmit(username: String): Boolean {
-                name=username
-                sameName=false
-                viewModel.getAllUsers(username,page)
+                name = username
+                sameName = false
+                viewModel.getAllUsers(username, page)
                 return false
             }
 
