@@ -1,9 +1,8 @@
 package com.c1ctech.mvvmwithnetworksource.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.c1ctech.mvvmwithnetworksource.User
+import com.c1ctech.mvvmwithnetworksource.model.User
 import com.c1ctech.mvvmwithnetworksource.model.UserList
 import com.c1ctech.mvvmwithnetworksource.repository.MainRepository
 import retrofit2.Call

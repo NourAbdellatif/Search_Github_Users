@@ -9,7 +9,7 @@ import retrofit2.http.Query
 
 interface RetrofitService {
     @GET("users")
-    fun getAllUsers(@Query("q") username :String,@Query("page") page:Int): Call<UserList>
+    fun getAllUsers(@Query("q") username: String, @Query("page") page: Int): Call<UserList>
 
     companion object {
 

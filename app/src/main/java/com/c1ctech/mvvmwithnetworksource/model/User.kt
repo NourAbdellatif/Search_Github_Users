@@ -1,24 +1,24 @@
-package com.c1ctech.mvvmwithnetworksource
+package com.c1ctech.mvvmwithnetworksource.model
 
 import android.os.Parcel
 import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
 
 data class User(
-    @SerializedName("login") val username: String,
-    @SerializedName("avatar_url") val avatar: String,
-    @SerializedName("followers_url") val followers: String,
-    @SerializedName("following_url") val following: String,
-    @SerializedName("repos_url") val repos: String
+    @SerializedName("login") val username: String?,
+    @SerializedName("avatar_url") val avatar: String?,
+    @SerializedName("id") val followers: String?,
+    @SerializedName("type") val following: String?,
+    @SerializedName("score") val repos: String?
 
 
-):Parcelable {
+) : Parcelable {
     constructor(parcel: Parcel) : this(
-        parcel.readString()!!,
-        parcel.readString()!!,
-        parcel.readString()!!,
-        parcel.readString()!!,
-        parcel.readString()!!
+        parcel.readString(),
+        parcel.readString(),
+        parcel.readString(),
+        parcel.readString(),
+        parcel.readString()
     ) {
     }
 

@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">MVVMWithNetworkSource</string>
+    <string name="temp_name">Temp Text</string>
 </resources>

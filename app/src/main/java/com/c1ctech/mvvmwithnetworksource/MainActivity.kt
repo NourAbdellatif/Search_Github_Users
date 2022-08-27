@@ -41,9 +41,9 @@ class MainActivity : AppCompatActivity() {
                 MainViewModel::class.java
             )
         binding.recyclerview.adapter = adapter
-        adapter.onItemClick={
-            val intent = Intent(this,DetailActivity::class.java)
-            intent.putExtra("user",it)
+        adapter.onItemClick = {
+            val intent = Intent(this, DetailActivity::class.java)
+            intent.putExtra("user", it)
             startActivity(intent)
         }
         viewModel.userListLive.observe(this) {
@@ -88,7 +88,7 @@ class MainActivity : AppCompatActivity() {
             override fun onQueryTextSubmit(username: String): Boolean {
                 name = username
                 sameName = false
-                page=1
+                page = 1
                 viewModel.getAllUsers(username, page)
                 return false
             }
